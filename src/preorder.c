@@ -1,4 +1,4 @@
-#include "preorder.h"
+#include "parse.h"
 
 int main (int argc, char * argv[]){
     tree* head; 
@@ -6,54 +6,52 @@ int main (int argc, char * argv[]){
     printf("\n%s\n", argv[1]); 
     
     head = findOparand (argv[1]);
-    
-    
-    // tree* n0 = insertLeft(&head, '/');
-    // tree* n1 = insertLeft(&n0, '+');
-    // tree* n3 = insertLeft(&n1, 'X');
-    // tree* n4 = insertRight(&n1, 'Y');
-    // tree* n2 = insertRight(&n0, 'Z');
-    //printf("\n%c\n", head->data);
     preorderTraversal(head);
     printf("\n\n");
     return 0;
 }
 
-tree* createTreeInIt (int data){
-    tree* newtree = (tree*)malloc (sizeof(tree));
-    newtree->data = data;
+tree* createTreeInIt(char *data) {
+    
+    tree* newtree = malloc(sizeof(tree));
+    printf("\nhere");
     newtree->left = NULL;
+    printf("\nhere");
     newtree->right = NULL;
+    printf("\nhere");
+    newtree->data = malloc(strlen(data) + 1);
+    strcpy(newtree->data, data); // store the whole string
+    printf("\nhere");
     return newtree;
 }
 
-tree* insertLeft (tree** head, int data){
-    tree* childTree = createTreeInIt (data);
-    if (*head == NULL){
-        *head = childTree;
-        return childTree;
-    }else {
+// tree* insertLeft (tree** head, int data){
+//     tree* childTree = createTreeInIt (data);
+//     if (*head == NULL){
+//         *head = childTree;
+//         return childTree;
+//     }else {
         
-        (*head)->left = childTree;
-    }
-    return childTree;
-}
+//         (*head)->left = childTree;
+//     }
+//     return childTree;
+// }
 
-tree* insertRight(tree** head, int data){
-    tree* childTree = createTreeInIt (data);
-    if (*head == NULL){
-        *head = childTree;
-        return childTree;
-    }else {
-        (*head)->right = childTree;
-    }
-    return childTree;
-}
+// tree* insertRight(tree** head, int data){
+//     tree* childTree = createTreeInIt (data);
+//     if (*head == NULL){
+//         *head = childTree;
+//         return childTree;
+//     }else {
+//         (*head)->right = childTree;
+//     }
+//     return childTree;
+// }
 
 // Preorder traversal
 void preorderTraversal(struct tree* root) {
   if (root == NULL) return;
-  printf("%c ", root->data);
+  printf("%s ", root->data);
   preorderTraversal(root->left);
   preorderTraversal(root->right);
 }
@@ -65,7 +63,7 @@ tree* findOparand (char str[] ){
     char op = '\0';
     char *ptr = str;
     int parenDepth =0;
-    
+    printf("\n%c 1",op);
     int len = strlen(str);
     if (len >= 2 && str[0] == '(' && str[len - 1] == ')') {
         parenDepth = 0;
@@ -86,12 +84,7 @@ tree* findOparand (char str[] ){
         }
     }
 
-    // check: not null right?
-    if(str == NULL || strlen(str) == 0){
-        return root;
-    }
-    
-
+    printf("\n%s2",str);printf("\n%s 3",str);
     // ----- Pass 1: Look for * or / -----
     while (*ptr != '\0') {
         if (*ptr == '('){
@@ -110,7 +103,7 @@ tree* findOparand (char str[] ){
     }
     
     // If no * or / found, reset and look for + or -
-    if (op == '\0') {
+    if (op=='\0') {
         pos = 0;
         parenDepth = 0;
         ptr = str;
@@ -135,7 +128,8 @@ tree* findOparand (char str[] ){
         printf("\nStrlen = %lu", strlen(str));
         printf("\npos found %d", pos);
         printf("\noparand found %c", op);
-        root = createTreeInIt(str[pos]);
+        char opStr[2] = { op, '\0' };
+        root = createTreeInIt(opStr);
         
         if (pos>= 1){
             char LeftS[pos];
@@ -147,8 +141,7 @@ tree* findOparand (char str[] ){
                 printf("\n%s Left", LeftS);
                 root -> left = findOparand(LeftS);
                 
-            }
-            
+            } 
         }
         int right =(strlen(str)-(pos + 1));
         if (right> 0){
@@ -166,7 +159,7 @@ tree* findOparand (char str[] ){
     }else {
         // Base case: no operators found — it’s a number
         printf("\nLeaf operand: %s\n", str);
-        return createTreeInIt(str[0]);
+        return createTreeInIt(str);
     }
     return root;
 }
