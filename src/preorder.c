@@ -12,16 +12,11 @@ int main (int argc, char * argv[]){
 }
 
 tree* createTreeInIt(char *data) {
-    
     tree* newtree = malloc(sizeof(tree));
-    printf("\nhere");
     newtree->left = NULL;
-    printf("\nhere");
     newtree->right = NULL;
-    printf("\nhere");
     newtree->data = malloc(strlen(data) + 1);
     strcpy(newtree->data, data); // store the whole string
-    printf("\nhere");
     return newtree;
 }
 
