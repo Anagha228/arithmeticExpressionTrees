@@ -3,11 +3,10 @@
 int main (int argc, char * argv[]){
     tree* head; 
 
-    printf("\n%s\n", argv[1]); 
-    
+    //printf("\n%s\n", argv[1]); 
     head = findOparand (argv[1]);
     inorderTraversal(head);
-    printf("\n\n");
+    printf("\n");
     return 0;
 }
 
@@ -42,7 +41,7 @@ tree* findOparand (char str[] ){
     char op = '\0';
     char *ptr = str;
     int parenDepth =0;
-    printf("\n%c 1",op);
+    //printf("\n%c 1",op);
     int len = strlen(str);
     if (len >= 2 && str[0] == '(' && str[len - 1] == ')') {
         parenDepth = 0;
@@ -63,7 +62,7 @@ tree* findOparand (char str[] ){
         }
     }
 
-    printf("\n%s2",str);printf("\n%s 3",str);
+    //printf("\n%s2",str);printf("\n%s 3",str);
     // ----- Pass 1: Look for * or / -----
     while (*ptr != '\0') {
         if (*ptr == '('){
@@ -104,9 +103,9 @@ tree* findOparand (char str[] ){
 
     // If we found an operator
     if (op != '\0') {
-        printf("\nStrlen = %lu", strlen(str));
-        printf("\npos found %d", pos);
-        printf("\noparand found %c", op);
+        //printf("\nStrlen = %lu", strlen(str));
+        //printf("\npos found %d", pos);
+        //printf("\noparand found %c", op);
         char opStr[2] = { op, '\0' };
         root = createTreeInIt(opStr);
         
@@ -117,7 +116,7 @@ tree* findOparand (char str[] ){
             }
             LeftS[pos] = '\0';
             if(strlen(LeftS)>0){
-                printf("\n%s Left", LeftS);
+                //printf("\n%s Left", LeftS);
                 root -> left = findOparand(LeftS);
                 
             } 
@@ -130,14 +129,14 @@ tree* findOparand (char str[] ){
             }
             RighS[right+1] = '\0';
             if(strlen(RighS)>0){
-                printf("\n%s Righ", RighS);
+                //printf("\n%s Righ", RighS);
                 root->right = findOparand(RighS);
             }
         }
         
     }else {
         // Base case: no operators found — it’s a number
-        printf("\nLeaf operand: %s\n", str);
+        //printf("\nLeaf operand: %s\n", str);
         return createTreeInIt(str);
     }
     return root;

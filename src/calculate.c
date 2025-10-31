@@ -3,36 +3,39 @@
 int main (int argc, char * argv[]) {
     tree* head;    
     float ans; 
-    
+    float variableArray[100];
     head = findOparand (argv[1]);
     //build variable array:
-    char * var = argv[2];
-    float variableArray[100];
-    char temp[50] ;
-    int count = 0, i=0;
-    while (*var != '\0'){
-        if(*var == '='){
-            var++;
-            count = 0;
-            while (*var != ';'&& *var != '\0'){
-                
-                temp[count] = *var;
-                count++;
+    //printf("%d\n", argc);
+    if (argc ==1 ){
+        printf("no argments passed");
+    }else if (argc == 3){
+        char * var = argv[2];
+        char temp[50] ;
+        int count = 0, i=0;
+        while (*var != '\0'){
+            if(*var == '='){
+                var++;
+                count = 0;
+                while (*var != ';'&& *var != '\0'){
+                    
+                    temp[count] = *var;
+                    count++;
+                    var++;
+                }
+                temp[count] = '\0';
+                variableArray[i] = atof(temp);
+                i++;
+            }else {
                 var++;
             }
-            temp[count] = '\0';
-            variableArray[i] = atof(temp);
-            i++;
-        }else {
-            var++;
+        }
+        for(int j =0; j<i; j++){
+            //printf("%f, ", variableArray[j]);
         }
     }
-    for(int j =0; j<i; j++){
-        printf("%f, ", variableArray[j]);
-    }
-    
     ans = calculate(head, variableArray);
-    printf( "\n main %4.2f\n", ans);
+    printf( "%4.2f\n", ans);
     //printf("\n");
     return 0;
 }
@@ -73,7 +76,7 @@ float calculate (struct tree* root, float variableArray[100]) {
     }
     else {
         var = replace (variableArray, root->data);
-        printf("var = %f", var);
+        //printf("var = %f", var);
         return var;
     }
     

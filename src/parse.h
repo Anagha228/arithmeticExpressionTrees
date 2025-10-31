@@ -13,8 +13,8 @@ tree* createTreeInIt (char data[]);
 tree* insertLeft (tree** head, int data);
 tree* insertRight(tree** head, int data);
 void inorderTraversal(struct tree* root);
-void preorderTraversal(struct tree* root);
-void postorderTraversal(tree* root);
+void preorderTraversal(struct tree* root, int *firstPrint);
+void postorderTraversal(tree* root, int *firstPrint);
 float calculate (struct tree* root, float variableArray[100]);
 float replace (float variableArray[100], char* data);
 
