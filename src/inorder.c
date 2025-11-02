@@ -1,8 +1,11 @@
 #include "parse.h"
 
 int main (int argc, char * argv[]){
+    if (argc == 1){
+        fprintf( stderr, "Error: undefined argument.\n");
+        return 1;
+    }
     tree* head; 
-
     //printf("\n%s\n", argv[1]); 
     head = findOparand (argv[1]);
     inorderTraversal(head);
@@ -43,6 +46,10 @@ tree* createTreeInIt(char *data) {
 
 //parse operators
 tree* findOparand (char str[] ){
+    if (str == NULL){
+        fprintf( stderr, "Error: undefined argument.\n");
+        exit(1);
+    }
     tree *root  = NULL;
     int pos = 0;
     char op = '\0';
@@ -50,6 +57,7 @@ tree* findOparand (char str[] ){
     int parenDepth =0;
     //printf("\n%c 1",op);
     int len = strlen(str);
+
     if (len >= 2 && str[0] == '(' && str[len - 1] == ')') {
         parenDepth = 0;
         int matched = 1;

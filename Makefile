@@ -1,5 +1,5 @@
 CC = clang
-CFLAGS = -std=c99 -Wall -pedantic
+CFLAGS = -std=c99 -Wall -pedantic -lm
 
 all: bin/preorder bin/inorder bin/postorder bin/calculate bin/heap
 

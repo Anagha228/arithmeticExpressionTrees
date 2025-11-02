@@ -8,14 +8,17 @@ int main (int argc, char * argv[]) {
     fprintf(stderr, "Syntax error: mismatched parentheses\n");
     return 1;
     }
-    //build variable array:
-    //printf("%d\n", argc);
+    
     if (argc ==1 ){
-        printf("no argments passed");
+        if (str == NULL){
+            fprintf( stderr, "Error: undefined argument.\n");
+            exit(1);
+        }
         return -1;
     }else if(argc == 2 ){
         char *equa = argv[1];
         head = findOparand(argv[1]);
+        //build variable array:
         while (*equa != '\0') {
             if (*equa == 'x') {
                 fprintf(stderr, "Error: undefined argument.\n");
@@ -185,6 +188,10 @@ tree* createTreeInIt(char *data) {
 }
 
 tree* findOparand (char str[] ){
+    if (str == NULL){
+        fprintf( stderr, "Error: undefined argument.\n");
+        exit(1);
+    }
     tree *root  = NULL;
     int pos = 0;
     char op = '\0';

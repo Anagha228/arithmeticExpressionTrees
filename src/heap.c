@@ -4,7 +4,7 @@ int main (int argc, char * argv[]) {
     int keys[20];
     int fArray [20][10];
     int returnVal=0;
-    returnVal = readFile(fArray, "bin/f.dat");
+    returnVal = readFile(fArray, "f.dat");
     //if file read successfully 
     if(returnVal==0){
         buildMaxHeap(fArray, keys);
@@ -29,7 +29,10 @@ int readFile(int fArray[20][10], char *filename){ //Reads data and validates inp
 
         for(int i=0; i<20; i++){
             for(int j=0; j<10; j++){
-                fscanf(fptr, "%d", &fArray[i][j]);
+                if(fscanf(fptr, "%d", &fArray[i][j]) != 1){
+                    fprintf(stderr, "Error: does not contain 200 2-digit integers.\n");
+                    exit(1);
+                }
             }
         }
     }

@@ -1,10 +1,13 @@
 #include "parse.h"
 
 int main (int argc, char * argv[]){
+    if (argc == 1){
+        fprintf( stderr, "Error: undefined argument.\n");
+        return 1;
+    }
     tree* head; 
     int x =0;
     //printf("\n%s\n", argv[1]); 
-    
     head = findOparand (argv[1]);
     preorderTraversal(head, &x);
     printf("\n");
@@ -66,6 +69,10 @@ void freeTree(struct tree* node) {
 
 //parse operators
 tree* findOparand (char str[] ){
+    if (str == NULL){
+            fprintf( stderr, "Error: undefined argument.\n");
+            exit(1);
+    }    
     tree *root  = NULL;
     int pos = 0;
     char op = '\0';

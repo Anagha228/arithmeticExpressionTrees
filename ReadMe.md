@@ -1,0 +1,14 @@
+## Build Instructions
+To build use the Makefile to make the executables. Then run with bin/preorder 'argument', bin/postorder 'argument', bin/inorder 'argument', bin/calculate 'argument' 'argument', and bin/heap. 
+
+## What I Learned
+
+This assignment was very instructive in several areas of programming and data structures. I learned how to build and manage dynamic trees to represent arithmetic expressions, and how recursion is a natural fit for evaluating expressions in preorder, inorder, and postorder traversals. Implementing the calculator helped me understand parsing techniques, operator precedence, and handling runtime errors such as division by zero or undefined variables. I also gained experience in memory management, including dynamically allocating and freeing tree nodes to avoid memory leaks. For heap operations, I learned how to maintain the max heap property efficiently and how array indices correspond to parent and child relationships. Consulting examples and explanations on GeeksforGeeks helped me understand tree traversals and recursive parsing, which were initially challenging. Overall, the assignment reinforced concepts of recursion, modular programming, array manipulation, and error handling in C.
+
+## Issues and Surprises Encountered
+
+Implementing this assignment involved several challenges. Parentheses in expressions needed to be enclosed in single quotes when passed in Bash; otherwise, the shell misinterpreted them. Handling division by zero required runtime checks to catch expressions such as `(1.0/0.0)` or `(1.0/(x1-x1))`. I also implemented checks for undefined variables to ensure all variables used in an expression have assigned values. Detecting invalid numbers like `1.0a` and exiting with a syntax error helped make the program more robust. Parsing complex expressions with correct operator precedence was tricky, and I used recursive tree construction to handle this. For tree operations and traversal algorithms, I referred to examples and explanations on [GeeksforGeeks](https://www.geeksforgeeks.org/) which helped me understand how to implement preorder, inorder, and postorder traversals correctly. Heap operations required careful attention to array bounds to maintain the max heap property without causing segmentation faults. Proper memory management was essential to avoid memory leaks when dynamically allocating tree nodes.
+
+## Disclosure
+
+I consulted examples and explanations on GeeksforGeeks to understand tree traversal algorithms and recursive parsing of arithmetic expressions. Otherwise, I completed the assignment independently.
