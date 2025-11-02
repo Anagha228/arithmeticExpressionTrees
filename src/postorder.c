@@ -6,9 +6,16 @@ int main (int argc, char * argv[]){
     head = findOparand (argv[1]);
     postorderTraversal(head, &x );
     printf("\n");
+    freeTree(head);
     return 0;
 }
-
+void freeTree(struct tree* node) {
+    if (node == NULL) return;
+    freeTree(node->left);
+    freeTree(node->right);
+    free(node->data);
+    free(node);
+}
 // Postorder traversal
 void postorderTraversal(tree* root,int *firstPrint) {
     if (root == NULL) {

@@ -7,9 +7,16 @@ int main (int argc, char * argv[]){
     head = findOparand (argv[1]);
     inorderTraversal(head);
     printf("\n");
+    freeTree(head);
     return 0;
 }
-
+void freeTree(struct tree* node) {
+    if (node == NULL) return;
+    freeTree(node->left);
+    freeTree(node->right);
+    free(node->data);
+    free(node);
+}
 //Inorder traversal
 void inorderTraversal(struct tree* root) {
     if (root == NULL) return;

@@ -8,6 +8,7 @@ int main (int argc, char * argv[]){
     head = findOparand (argv[1]);
     preorderTraversal(head, &x);
     printf("\n");
+    freeTree(head);
     return 0;
 }
 
@@ -53,6 +54,14 @@ void preorderTraversal(struct tree* root, int *firstPrint) {
     *firstPrint = 1;
     preorderTraversal(root->left, firstPrint);
     preorderTraversal(root->right, firstPrint);
+}
+
+void freeTree(struct tree* node) {
+    if (node == NULL) return;
+    freeTree(node->left);
+    freeTree(node->right);
+    free(node->data);
+    free(node);
 }
 
 //parse operators

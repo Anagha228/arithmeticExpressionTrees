@@ -3,18 +3,25 @@
 int main (int argc, char * argv[]) {
     int keys[20];
     int fArray [20][10];
-    readFile(fArray, "f.dat");
-    buildMaxHeap(fArray, keys);
-    //printf("%d\n", fArray[1][0]);
-    for(int i=0; i<20; i++){
-        printf("%d ", keys[i]);
+    int returnVal=0;
+    returnVal = readFile(fArray, "bin/f.dat");
+    //if file read successfully 
+    if(returnVal==0){
+        buildMaxHeap(fArray, keys);
+        for(int i=0; i<20; i++){
+            for(int j=0; j<10; j++){
+                printf( "%02d ", fArray[i][j]);
+            }
+            printf("\n");
+        }
     }
-    printf("\n");
+    
+    
     return 0;
 }
 
 int readFile(int fArray[20][10], char *filename){ //Reads data and validates input
-    FILE *fptr = fopen("f.dat", "r");
+    FILE *fptr = fopen(filename, "r");
     if (fptr == NULL) {
         printf("Could not open file \n");
         return -1; // Error
@@ -30,12 +37,10 @@ int readFile(int fArray[20][10], char *filename){ //Reads data and validates inp
     return 0;
 }	
 
-void computeKeys(int arr[20][10], int keys[20]){
+void computeKeys(int arr[20][10], int keys[20]){ //creates keys
     for(int i=0; i<20; i++){
-        keys[i] = arr[i][0]+arr[i][1]+arr[i][2];
-        //printf("%d ", keys[i]);
+        keys[i] = arr[i][0]+arr[i][1]+arr[i][2]; 
     }
-    //printf("\n");
 }
 
 void buildMaxHeap(int arr[20][10], int keys[20]){ //Performs heapify bottom-up
@@ -69,10 +74,7 @@ void buildMaxHeap(int arr[20][10], int keys[20]){ //Performs heapify bottom-up
     
     }
 }
-
-
-void heapify(int arr[20][10], int keys[20], int n, int i){}	//Percolates down node i
-void writeFile(int arr[20][10], char *filename){}	//Writes output to file
+	
 void swapRows(int a[10], int b[10]){
     int temp[10];
     for (int i = 0; i<10; i++){

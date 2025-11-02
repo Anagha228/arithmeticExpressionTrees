@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 typedef struct tree {
     char* data;
     struct tree* left;
@@ -17,5 +18,7 @@ void preorderTraversal(struct tree* root, int *firstPrint);
 void postorderTraversal(tree* root, int *firstPrint);
 float calculate (struct tree* root, float variableArray[100]);
 float replace (float variableArray[100], char* data);
-
+void freeTree (struct tree* node);
+int checkParentheses(const char* expr);
+int isValidNumber(const char* str);
 
